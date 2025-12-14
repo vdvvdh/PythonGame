@@ -14,32 +14,15 @@ class Game:
         pygame.display.set_caption("Kitsune - Virtual Pet Game")
         self.clock = pygame.time.Clock()
 
-        #images
         self.image_loader = ImageLoader()
         if not self.image_loader.load_images():
             print("Geen images gevonden, placeholders worden gebruikt.")
 
-        #pet
         stats = load_data()
         self.pet = Pet(stats=stats)
-
-        #ui
         self.ui = UI(self.screen, self.image_loader)
-
-        #auto-save timer
         self.auto_save_timer = 0
         self.auto_save_interval = 30
-
-        #begin console (controls)
-        print("\n" + "="*50)
-        print("Started Kitsune")
-        print("="*50)
-        print("\nControls:")
-        print("  F - Voeren")
-        print("  P - Spelen")
-        print("  C - Wassen")
-        print("  ESC - Afsluiten en opslaan")
-        print("\n" + "="*50 + "\n")
 
     def run(self):
         running = True
@@ -60,10 +43,7 @@ class Game:
                 elif event.type == pygame.MOUSEMOTION:
                     self.handle_mouse_motion(event.pos)
 
-            # update pet en game
             self.update(dt)
-
-            # teken alles
             self.draw()
 
             pygame.display.flip()
@@ -114,11 +94,7 @@ class Game:
         floor_rect = pygame.Rect(0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150)
         pygame.draw.rect(self.screen, (200, 220, 180), floor_rect)
         pygame.draw.rect(self.screen, (150, 170, 130), floor_rect, 3)
-
-        #pet
         self.draw_pet()
-
-        #ui
         self.ui.draw(self.pet)
 
         #fps
