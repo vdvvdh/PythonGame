@@ -1,20 +1,44 @@
-#settings.py
+import os
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
 
-#stat boundaries
-MIN_STAT = 0
-MAX_STAT = 100
-STAT_DECAY_RATE = 0.1
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+LIGHT_BLUE = (240, 248, 255)
+GRAY = (200, 200, 200)
+DARK_GRAY = (100, 100, 100)
 
-#default stats
+HUNGER_INCREASE_RATE = 2
+ENERGY_DECREASE_RATE = 1
+CLEANLINESS_DECREASE_RATE = 1
+HAPPINESS_DECREASE_RATE = 0.5
+
+FEED_HUNGER_REDUCTION = 20
+FEED_HAPPINESS_BOOST = 5
+
+PLAY_ENERGY_COST = 10
+PLAY_HAPPINESS_BOOST = 15
+PLAY_HUNGER_INCREASE = 5
+
+CLEAN_CLEANLINESS_BOOST = 30
+CLEAN_HAPPINESS_BOOST = 5
+
+#save
+SAVE_FILE = "pet_save.json"
 DEFAULT_STATS = {
+    "name": "Kitsune",
     "hunger": 50,
-    "energy": 50,
     "happiness": 50,
-    "hygiene": 50,
-    "age": 0
+    "energy": 50,
+    "cleanliness": 50,
+    "age": 0,
+    "level": 1,
+    "experience": 0
 }
 
-SAVE_FILE = "savefile.json"
+EXPERIENCE_PER_LEVEL = 100
+ASSETS_DIR = "assets"
+IMAGES_DIR = os.path.join(ASSETS_DIR, "images")
+SOUNDS_DIR = os.path.join(ASSETS_DIR, "sounds")
