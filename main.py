@@ -52,7 +52,7 @@ class Game:
 
     def update(self, dt):
         """update pet stats en auto-save"""
-        self.pet.tick()
+        self.pet.tick(dt)
 
         #auto-save
         self.auto_save_timer += dt
@@ -129,7 +129,9 @@ class Game:
             pygame.K_f: 'food',
             pygame.K_p: 'play',
             pygame.K_c: 'clean',
+            pygame.K_s: 'sleep'
         }
+
 
         if key in actions:
             action = actions[key]
@@ -137,10 +139,9 @@ class Game:
             if success:
                 button = self.ui.buttons[action]
                 self.ui.add_notification(f"✓ {button.label.split('(')[0].strip()}")
-
+                
     def handle_mouse_click(self, pos):
-        """clicks op ui knoppen"""
-        pass
+        self.ui.handle_click(pos, self.pet)
 
     def handle_mouse_motion(self, pos):
         """hover effect"""

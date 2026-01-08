@@ -2,18 +2,7 @@ import json
 import os
 from datetime import datetime
 
-SAVE_FILE = "pet_save.json"
-
-DEFAULT_STATS = {
-    "name": "Kitsune",
-    "hunger": 50,
-    "happiness": 50,
-    "energy": 50,
-    "cleanliness": 50,
-    "age": 0,
-    "level": 1,
-    "experience": 0
-}
+from settings import SAVE_FILE, DEFAULT_STATS
 
 def save_data(pet):
     """save pet data to file"""

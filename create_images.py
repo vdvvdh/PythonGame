@@ -145,6 +145,12 @@ def create_simple_icon(filename, icon_type="food", size=64):
         for i in range(3):
             x = cx-hw//3 + i*tw
             draw.rectangle([x, cy-hh, x+tw//2, cy-hh//2], fill="lightblue", outline="black", width=1)
+    elif icon_type == "sleep":
+        bed_w, bed_h = size * 0.7, size * 0.4
+        kussen_h = bed_h * 0.4
+        draw.ellipse([cx - bed_w/2, cy - bed_h/2, cx + bed_w/2, cy + bed_h/2], fill="#FFA07A",outline="brown",width=2)
+        draw.ellipse([cx - bed_w/2 + 5, cy - bed_h/2 + 5, cx + bed_w/2 - 5, cy - bed_h/2 + kussen_h],fill="#FFFACD",)
+        draw.text((cx - 15, cy - bed_h/2 + 5),"Zzz",fill="blue")
 
     img.save(os.path.join("assets/images", filename))
     print(f"aangemaakt: assets/images/{filename}")
@@ -156,6 +162,7 @@ create_cat_image("pet_happy.png", "happy")
 create_cat_image("pet_sad.png", "sad")
 create_cat_image("pet_dirty.png", "dirty")
 create_cat_image("pet_tired.png", "tired")
+create_simple_icon("icon_sleep.png", "sleep")
 
 #maak iconen
 create_simple_icon("icon_food.png", "food")

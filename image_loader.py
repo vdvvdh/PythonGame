@@ -16,6 +16,7 @@ class ImageLoader:
             self.images['icon_clean'] = pygame.image.load(os.path.join(self.image_folder, 'icon_clean.png')).convert_alpha()
             self.images['icon_food'] = pygame.image.load(os.path.join(self.image_folder, 'icon_food.png')).convert_alpha()
             self.images['icon_play'] = pygame.image.load(os.path.join(self.image_folder, 'icon_play.png')).convert_alpha()
+            self.images['icon_sleep'] = pygame.image.load(os.path.join(self.image_folder, 'icon_sleep.png')).convert_alpha()
             return True
         except Exception as e:
             print(f"fout bij laden afbeeldingen: {e}")

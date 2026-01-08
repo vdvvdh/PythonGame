@@ -1,5 +1,7 @@
 import pygame
 
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+
 class Button:
     def __init__(self, x, y, image, scale=1.0, label=""):
         width = image.get_width()
@@ -52,7 +54,8 @@ class UI:
         self.buttons = {
             'food': Button(50, 400, self.image_loader.get_image('icon_food'), 0.7, label="Voeren"),
             'play': Button(150, 400, self.image_loader.get_image('icon_play'), 0.7, label="Spelen"),
-            'clean': Button(250, 400, self.image_loader.get_image('icon_clean'), 0.7, label="Wassen")
+            'clean': Button(250, 400, self.image_loader.get_image('icon_clean'), 0.7, label="Wassen"),
+            'sleep': Button(350, 400, self.image_loader.get_image('icon_sleep'), 0.7, label="Slapen")
         }
 
         self.hunger_bar = StatBar(50, 50, 200, 20, (220, 220, 220), (255, 100, 100), "Hunger")
@@ -70,12 +73,15 @@ class UI:
 
         for button in self.buttons.values():
             button.draw(self.screen)
+            
+            x_pos = SCREEN_WIDTH - 150
+            y_pos = 50
+            
+            name_text = self.font.render(f"{pet.name}", True, (50, 50, 50))
+            self.screen.blit(name_text, (x_pos, y_pos))
 
-        name_text = self.font.render(f"Naam: {pet.name}", True, (50, 50, 50))
-        self.screen.blit(name_text, (350, 50))
-
-        level_text = self.font.render(f"Level: {pet.level}", True, (50, 50, 50))
-        self.screen.blit(level_text, (350, 80))
+            level_text = self.font.render(f"Level {pet.level}", True, (50, 50, 50))
+            self.screen.blit(level_text, (x_pos, y_pos + 30))
 
         for i, note in enumerate(self.notifications[-5:]):
             text = self.small_font.render(note, True, (0, 0, 0))
@@ -85,24 +91,31 @@ class UI:
         for name, button in self.buttons.items():
             if button.rect.collidepoint(pos):
                 if name == "food":
-                    pet.feed()
+                    success = pet.feed()
                 elif name == "play":
-                    pet.play()
+                    success = pet.play()
                 elif name == "clean":
-                    pet.clean()
-                self.add_notification(f"{button.label} uitgevoerd!")
+                    success = pet.clean()
+                elif name == "sleep":
+                    success = pet.sleep()
+                else:
+                    success = False
 
-    def perform_action(self, action, pet):
-        """Called bij keypress F, P, C"""
-        if action == "food":
-            success = pet.feed()
-        elif action == "play":
-            success = pet.play()
-        elif action == "clean":
-            success = pet.clean()
-        else:
-            success = False
-        return success
+                if success:
+                    self.add_notification(f"{button.label} uitgevoerd!")
+                else:
+                    self.add_notification(f"{button.label} mislukt")
+                    
+        def perform_action(self, action, pet):
+            if action == "food":
+                return pet.feed()
+            elif action == "play":
+                return pet.play()
+            elif action == "clean":
+                return pet.clean()
+            elif action == "sleep":
+                return pet.sleep()
+            return False
 
     def add_notification(self, text):
         self.notifications.append(text)
