@@ -73,19 +73,19 @@ class UI:
 
         for button in self.buttons.values():
             button.draw(self.screen)
+            
+            x_pos = SCREEN_WIDTH - 150
+            y_pos = 50
+            
+            name_text = self.font.render(f"{pet.name}", True, (50, 50, 50))
+            self.screen.blit(name_text, (x_pos, y_pos))
 
-        x_pos = SCREEN_WIDTH - 150
-        y_pos = 50
-
-        name_text = self.font.render(pet.name, True, (50, 50, 50))
-        self.screen.blit(name_text, (x_pos, y_pos))
-
-        level_text = self.font.render(f"Level {pet.level}", True, (50, 50, 50))
-        self.screen.blit(level_text, (x_pos, y_pos + 30))
+            level_text = self.font.render(f"Level {pet.level}", True, (50, 50, 50))
+            self.screen.blit(level_text, (x_pos, y_pos + 30))
 
         for i, note in enumerate(self.notifications[-5:]):
             text = self.small_font.render(note, True, (0, 0, 0))
-            self.screen.blit(text, (50, 500 + i * 20))
+            self.screen.blit(text, (50, 500 + i*20))
 
     def handle_click(self, pos, pet):
         for name, button in self.buttons.items():
@@ -96,17 +96,17 @@ class UI:
                     self.add_notification(f"{button.label} uitgevoerd!")
                 else:
                     self.add_notification(f"{button.label} mislukt")
-                    
-        def perform_action(self, action, pet):
-            if action == "food":
-                return pet.feed()
-            elif action == "play":
-                return pet.play()
-            elif action == "clean":
-                return pet.clean()
-            elif action == "sleep":
-                return pet.sleep()
-            return False
+
+    def perform_action(self, action, pet):
+        if action == "food":
+            return pet.feed()
+        elif action == "play":
+            return pet.play()
+        elif action == "clean":
+            return pet.clean()
+        elif action == "sleep":
+            return pet.sleep()
+        return False
 
     def add_notification(self, text):
         self.notifications.append(text)
