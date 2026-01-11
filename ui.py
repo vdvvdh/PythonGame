@@ -73,33 +73,24 @@ class UI:
 
         for button in self.buttons.values():
             button.draw(self.screen)
-            
-            x_pos = SCREEN_WIDTH - 150
-            y_pos = 50
-            
-            name_text = self.font.render(f"{pet.name}", True, (50, 50, 50))
-            self.screen.blit(name_text, (x_pos, y_pos))
 
-            level_text = self.font.render(f"Level {pet.level}", True, (50, 50, 50))
-            self.screen.blit(level_text, (x_pos, y_pos + 30))
+        x_pos = SCREEN_WIDTH - 150
+        y_pos = 50
+
+        name_text = self.font.render(pet.name, True, (50, 50, 50))
+        self.screen.blit(name_text, (x_pos, y_pos))
+
+        level_text = self.font.render(f"Level {pet.level}", True, (50, 50, 50))
+        self.screen.blit(level_text, (x_pos, y_pos + 30))
 
         for i, note in enumerate(self.notifications[-5:]):
             text = self.small_font.render(note, True, (0, 0, 0))
-            self.screen.blit(text, (50, 500 + i*20))
+            self.screen.blit(text, (50, 500 + i * 20))
 
     def handle_click(self, pos, pet):
         for name, button in self.buttons.items():
             if button.rect.collidepoint(pos):
-                if name == "food":
-                    success = pet.feed()
-                elif name == "play":
-                    success = pet.play()
-                elif name == "clean":
-                    success = pet.clean()
-                elif name == "sleep":
-                    success = pet.sleep()
-                else:
-                    success = False
+                success = self.perform_action(name, pet)
 
                 if success:
                     self.add_notification(f"{button.label} uitgevoerd!")
