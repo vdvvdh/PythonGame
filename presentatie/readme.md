@@ -1,0 +1,4 @@
+## Python Game Kitsune
+
+De presentatie:
+https://talnet-my.sharepoint.com/:v:/g/personal/2207907_talnet_nl/IQDzA5h8i7J3T60zmBhyjzAqAeXj0y6rhdcjbjpit0ThS60?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&email=j.veenstra%40rocva.nl&e=RXgP7g
